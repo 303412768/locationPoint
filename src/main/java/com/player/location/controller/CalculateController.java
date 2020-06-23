@@ -1,20 +1,12 @@
 package com.player.location.controller;
 
-import com.player.location.model.LocationInfo;
-import com.player.location.model.Playground;
-
 import com.player.location.service.IMoveStepService;
 import com.player.location.tools.Result;
-import com.player.location.tools.StaticInfo;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
