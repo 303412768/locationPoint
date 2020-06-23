@@ -1,0 +1,59 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Initial Location</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <input type="text"  id="first_rows" class="form-control" placeholder="First Rows">
+            </div>
+            <div class="form-group">
+                <input type="text"  id="first_cells" class="form-control" placeholder="First Cells">
+            </div>
+            <div class="form-group">
+                <select  id="toward" class="custom-select" >
+                    <option value="W" selected>West</option>
+                    <option value="N">North</option>
+                    <option value="E">East</option>
+                    <option value="S">South</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="setUpLocation()">Submit</button>
+    </div>
+</div>
+<script type="text/javascript">
+    function setUpLocation() {
+        console.log($("#toward").val());
+        let locationInfo = {
+            'row': $("#first_rows").val(),
+            'cell': $("#first_cells").val(),
+            'toward':$("#toward").val()
+        };
+
+        const post_url = "./api/v1/order/location"; //get form action url
+        $.post(post_url, locationInfo, function (data) {
+            console.log(data.code);
+            if (data.code == 200) {
+                $('#myModal').modal('hide');
+            } else {
+                showToast(data.msg)
+            }
+        });
+
+
+
+
+
+
+
+
+    }
+
+</script>

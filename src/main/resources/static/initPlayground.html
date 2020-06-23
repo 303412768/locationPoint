@@ -1,0 +1,43 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"> Initial Playground</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <input type="text" name="maxRows" id="init_rows" class="form-control" placeholder="Init Rows">
+            </div>
+            <div class="form-group">
+                <input type="text" name="maxCells" id="init_cells" class="form-control" placeholder="Init Cells">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="initPlayground()">Submit</button>
+    </div>
+</div>
+<script type="text/javascript">
+    function initPlayground() {
+        init_rows = $("#init_rows").val();
+        init_cells = $("#init_cells").val();
+        let playgroundJson = {
+            'maxRows': init_rows,
+            'maxCells': init_cells
+        };
+        const post_url = "./api/v1/order/init"; //get form action url
+         $.post(post_url, playgroundJson, function (data) {
+             if (data.code === 200) {
+                 buildTable($table, init_cells, init_rows);
+                 $('#myModal').modal('hide');
+             } else {
+                 showToast("There are some errors! Please reload the website.")
+             }
+         });
+
+    }
+
+</script>
