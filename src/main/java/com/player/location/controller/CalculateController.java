@@ -29,7 +29,13 @@ public class CalculateController {
     @ResponseBody
     public Result  playerMove(@RequestParam(value = "txt_file") MultipartFile files,HttpServletRequest request) {
         Result result=moveStepService.saveFile(files, request);
+        if (result.getCode() != 200) {
+            return result;
+        }
         result = moveStepService.readFileByLine(result.object.toString());
+        if (result.getCode() != 200) {
+            return result;
+        }
         result =moveStepService.move((List<String>) result.object);
         return result;
     }
